@@ -46,7 +46,7 @@ require('lazy').setup({
 
       -- Useful status updates for LSP
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-      { 'j-hui/fidget.nvim', opts = {} },
+      { 'j-hui/fidget.nvim', opts = {}, tag = "legacy" },
 
       -- Additional lua configuration, makes nvim stuff amazing!
       'folke/neodev.nvim',
@@ -249,7 +249,7 @@ vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { de
 -- See `:help nvim-treesitter`
 require('nvim-treesitter.configs').setup {
   -- Add languages to be installed here that you want installed for treesitter
-  ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'typescript', 'help', 'vim', 'c_sharp', 'yaml',
+  ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'typescript', 'vimdoc', 'vim', 'c_sharp', 'yaml',
     'json' },
 
   -- Autoinstall languages that are not installed. Defaults to false.
@@ -381,10 +381,6 @@ local servers = {
       telemetry = { enable = false },
     },
   },
-  csharp_ls = {},
-  omnisharp = {},
-  omnisharp_mono = {},
-
 }
 
 -- Setup neovim lua configuration
@@ -467,3 +463,9 @@ file_settings.setup()
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
+
+
+
+-- require'lspconfig'.omnisharp.setup {
+--     cmd = { "mono", "--assembly-loader=strict", "/home/sanhajio/.vscode/extensions/ms-dotnettools.csharp-1.26.0-linux-x64/.omnisharp/1.39.7/omnisharp/OmniSharp.exe" },
+-- }
