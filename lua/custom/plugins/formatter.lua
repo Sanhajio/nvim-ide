@@ -4,23 +4,23 @@ return {
     config = function()
         local util = require "formatter.util"
         local lsp_util = require("lspconfig/util")
+
+        -- au BufWritePre * try | undojoin | :FormatWrite | catch /E790/ | :FormatWrite | endtry
+
         vim.api.nvim_exec(
             [[
               augroup FormatOnSave
                 autocmd!
-                au BufWritePre * try | undojoin | :FormatWrite | catch /E790/ | :FormatWrite | endtry
+                autocmd BufWritePost * FormatWrite
               augroup end
             ]],
             true
         )
 
         require("formatter").setup {
-            logging = false,
+            logging = true,
             log_level = vim.log.levels.WARN,
-            require("formatter.filetypes.lua").stylua,
-            require("formatter.filetypes.python").black,
-            require("formatter.filetypes.json").jsbeautify,
-            require("formatter.filetypes.typescript").prettier,
+
             filetype = {
                 cs = {
                     function()
@@ -37,6 +37,21 @@ return {
                             }
                         }
                     end
+                },
+                lua = {
+                    require("formatter.filetypes.lua").stylua,
+                },
+                python = {
+                    require("formatter.filetypes.python").black,
+                },
+                json = {
+                    require("formatter.filetypes.json").jsbeautify,
+                },
+                typescriptreact = {
+                    require("formatter.filetypes.typescriptreact").prettier,
+                },
+                typescript = {
+                    require("formatter.filetypes.typescript").prettier,
                 }
             }
         }

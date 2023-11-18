@@ -10,4 +10,9 @@ function! neoformat#formatters#lua#enabled() abort
     return ['luafmt']
 endfunction
 
+let g:neoformat_try_node_exe = 1
+
+function! neoformat#formatters#lua#enabled() abort
+    return ['prettier']
+endfunction
 
