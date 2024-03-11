@@ -1,8 +1,7 @@
 return {
-  "preservim/nerdtree",
-  version = "*",
-  config = function () 
+  'preservim/nerdtree',
+  version = '*',
+  config = function()
     vim.g.NERDTreeShowHidden = 1
-
-  end
+  end,
 }

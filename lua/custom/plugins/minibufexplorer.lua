@@ -1,6 +1,6 @@
 return {
-  "fholgado/minibufexpl.vim",
-  version = "*",
+  'fholgado/minibufexpl.vim',
+  version = '*',
   config = function()
     vim.cmd [[
        augroup minibufexpl
@@ -10,5 +10,5 @@ return {
      ]]
 
     vim.g.miniBufExplMapWindowNavVim = 1
-  end
+  end,
 }
