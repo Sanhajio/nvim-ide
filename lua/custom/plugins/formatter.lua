@@ -52,6 +52,10 @@ return {
                 },
                 typescript = {
                     require("formatter.filetypes.typescript").prettier,
+                },
+                go = {
+                    require("formatter.filetypes.go").gofmt,
+                    require("formatter.filetypes.go").goimports,
                 }
             }
         }
