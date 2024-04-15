@@ -150,7 +150,43 @@ require('lazy').setup {
     dir = '/home/sanhajio/development/pp/growth/nvim/neosky',
     name = 'neosky',
   },
-  { 'edluffy/hologram.nvim' },
+  { 'nvim-neotest/nvim-nio' },
+  {
+    'vhyrro/luarocks.nvim',
+    priority = 1001, -- this plugin needs to run before anything else
+    opts = {
+      rocks = { 'magick', 'fzy', 'pathlib.nvim ~> 1.0' },
+      luarocks_build_args = { '--with-lua=/home/sanhajio/bin/lua-5.1.5/bin/lua' },
+    },
+  },
+  {
+    '3rd/image.nvim',
+    dependencies = { 'luarocks.nvim' },
+    opts = {
+      backend = 'ueberzug',
+      integrations = {
+        markdown = {
+          enabled = true,
+          clear_in_insert_mode = false,
+          download_remote_images = true,
+          only_render_image_at_cursor = false,
+          filetypes = { 'markdown', 'vimwiki' }, -- markdown extensions (ie. quarto) can go here
+        },
+        neorg = {
+          enabled = false,
+          clear_in_insert_mode = false,
+          download_remote_images = true,
+          only_render_image_at_cursor = false,
+          filetypes = { 'norg' },
+        },
+      },
+      max_width = nil,
+      max_height = nil,
+      max_width_window_percentage = nil,
+      max_height_window_percentage = 50,
+      kitty_method = 'normal',
+    },
+  },
 
   -- NOTE: This is where your plugins related to LSP can be installed.
   --  The configuration is done below. Search for lspconfig to find it below.
@@ -686,7 +722,7 @@ require('lazy').setup {
 
         ---@diagnostic disable-next-line: missing-fields
         require('nvim-treesitter.configs').setup {
-          ensure_installed = { 'bash', 'c', 'html', 'lua', 'markdown', 'vim', 'vimdoc' },
+          ensure_installed = { 'bash', 'c', 'html', 'lua', 'markdown', 'vim', 'vimdoc', 'markdown_inline' },
           -- Autoinstall languages that are not installed
           auto_install = true,
           highlight = { enable = true },
@@ -985,3 +1021,20 @@ local file_settings = require 'file_settings'
 file_settings.setup()
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
+--
+-- Plugin Development
+-- Set keymap for Current under development Plugin
+vim.api.nvim_set_keymap('n', '<leader>ns', ':NeoSky<CR>', { noremap = true, silent = true })
+
+-- Set keymap for Current under development Plugin
+-- Set keymap for NeoSkyReload
+vim.api.nvim_set_keymap('n', '<leader>nr', ':NeoSkyReload<CR>', { noremap = true, silent = true })
+
+-- Set keymap for Current under development Plugin
+vim.api.nvim_set_keymap('n', '<leader>nR', ':NeoSkyUpdate<CR>', { noremap = true, silent = true })
+
+-- Set keymap for Current under development Plugin
+vim.api.nvim_set_keymap('n', '<leader>nu', ':NeoSkyStart<CR>', { noremap = true, silent = true })
+
+-- Set keymap for Current under development Plugin
+vim.api.nvim_set_keymap('n', '<leader>nx', ':NeoSkyStop<CR>', { noremap = true, silent = true })
