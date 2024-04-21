@@ -184,6 +184,7 @@ require('lazy').setup {
       max_height = nil,
       max_width_window_percentage = nil,
       max_height_window_percentage = 50,
+      tmux_show_only_in_active_window = false,
       kitty_method = 'normal',
     },
   },

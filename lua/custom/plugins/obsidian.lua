@@ -6,12 +6,5 @@ return {
   dependencies = {
     'nvim-lua/plenary.nvim',
   },
-  opts = {
-    workspaces = {
-      {
-        name = 'neosky',
-        path = '~/neosky',
-      },
-    },
-  },
+  opts = {},
 }
