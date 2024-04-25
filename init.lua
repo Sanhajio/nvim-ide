@@ -184,7 +184,7 @@ require('lazy').setup {
       max_height = nil,
       max_width_window_percentage = nil,
       max_height_window_percentage = 50,
-      tmux_show_only_in_active_window = false,
+      tmux_show_only_in_active_window = true,
       kitty_method = 'normal',
     },
   },
@@ -1011,6 +1011,8 @@ cmp.setup {
     { name = 'luasnip' },
   },
 }
+
+vim.opt_local.conceallevel = 1
 
 local remaps = require 'remaps'
 remaps.setup()
