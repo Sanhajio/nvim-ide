@@ -1,3 +1,3 @@
 return {
-   "https://git.sr.ht/~soywod/himalaya-vim",
+  --   "https://git.sr.ht/~soywod/himalaya-vim",
 }
