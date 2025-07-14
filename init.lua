@@ -18,6 +18,8 @@ vim.schedule(function()
   vim.o.clipboard = 'unnamedplus'
 end)
 
+vim.g.clipboard = 'osc52'
+
 -- Enable break indent
 vim.o.breakindent = true
 
@@ -825,3 +827,23 @@ remaps.setup()
 -- }
 local file_settings = require 'file_settings'
 file_settings.setup()
+
+-- this should be temporary because of some neovim issue with pasting with osc52
+local function paste()
+  return {
+    vim.fn.split(vim.fn.getreg '', '\n'),
+    vim.fn.getregtype '',
+  }
+end
+
+vim.g.clipboard = {
+  name = 'OSC 52',
+  copy = {
+    ['+'] = require('vim.ui.clipboard.osc52').copy '+',
+    ['*'] = require('vim.ui.clipboard.osc52').copy '*',
+  },
+  paste = {
+    ['+'] = paste,
+    ['*'] = paste,
+  },
+}
