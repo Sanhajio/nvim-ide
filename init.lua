@@ -6,6 +6,12 @@ vim.g.have_nerd_font = false
 vim.o.number = true
 vim.o.mouse = 'a'
 
+-- Default shiftwidth and tabstop across all files
+-- Should be overwritten by guess-indent if activated
+vim.o.shiftwidth = 2
+vim.o.tabstop = 2
+vim.o.expandtab = true
+
 vim.o.showmode = false
 
 vim.schedule(function()
