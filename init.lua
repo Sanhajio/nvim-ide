@@ -14,12 +14,6 @@ vim.o.expandtab = true
 
 vim.o.showmode = false
 
-vim.schedule(function()
-  vim.o.clipboard = 'unnamedplus'
-end)
-
-vim.g.clipboard = 'osc52'
-
 -- Enable break indent
 vim.o.breakindent = true
 
@@ -836,6 +830,8 @@ local function paste()
   }
 end
 
+-- TODO: This does not work, but it should
+--
 vim.g.clipboard = {
   name = 'OSC 52',
   copy = {
@@ -847,3 +843,18 @@ vim.g.clipboard = {
     ['*'] = paste,
   },
 }
+
+vim.schedule(function()
+  vim.o.clipboard = 'unnamedplus'
+end)
+
+-- TODO: This does work but I don't understand it
+vim.api.nvim_create_autocmd('TextYankPost', {
+  callback = function()
+    vim.highlight.on_yank()
+    local copy_to_unnamedplus = require('vim.ui.clipboard.osc52').copy '+'
+    copy_to_unnamedplus(vim.v.event.regcontents)
+    local copy_to_unnamed = require('vim.ui.clipboard.osc52').copy '*'
+    copy_to_unnamed(vim.v.event.regcontents)
+  end,
+})
